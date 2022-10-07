@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/WebDevSimplified/typescript-todo-list/issues"
   },
-  "homepage": "https://github.com/WebDevSimplified/typescript-todo-list#readme"
+  "homepage": "https://github.com/WebDevSimplified/typescript-todo-list#readme",
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  }
 }
