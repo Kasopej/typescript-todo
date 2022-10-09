@@ -33,6 +33,8 @@ form?.addEventListener("submit", (evt) => {
 
         addListItem(newTask);
         input.value = "";
+
+        saveTasks(newTask);
     }
 });
 
@@ -52,8 +54,6 @@ function addListItem<T>(newTask: Task) {
         newTask.completed = target.checked;
         saveTasks(newTask);
     });
-
-    saveTasks(newTask);
 }
 
 function saveTasks(task: Task) {
