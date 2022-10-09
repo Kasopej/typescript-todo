@@ -22,7 +22,7 @@ form?.addEventListener("submit", (evt) => {
     evt.preventDefault();
     
     if (input) {
-        if (input.value === "" || input.value === null) return;
+        if (!input.value) return;
 
         const newTask: Task = {
             id: uuidV4(),
