@@ -1,6 +1,5 @@
 {
   "scripts": {
-    "start": "snowpack dev",
     "build": "webpack --mode=production --node-env=production",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
     "format": "prettier --write \"src/**/*.{ts,js}\"",
@@ -8,7 +7,7 @@
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-    "serve": "webpack serve"
+    "serve": "webpack serve --mode=development"
   },
   "dependencies": {
     "bootstrap": "^5.2.2",

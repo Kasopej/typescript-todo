@@ -1,25 +1,26 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname),
   target: 'browserslist',
   entry: ['./src/index.ts'],
   output: {
-    fileName: '[name].[contenthash].bundle.js',
+    filename: '[name].[contenthash].bundle.js',
     asyncChunks: true,
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, 'src'),
-      },
-      extensions: ['.ts', '.js', '...'],
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
     },
+    extensions: ['.ts', '.js', '...'],
   },
   module: {
     rules: [
-      { test: /\.css$/i, use: ['style-loader', 'css_loader'] },
+      { test: /\.css$/i, use: ['style-loader', 'css-loader'] },
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css_loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.js$/i,
@@ -56,4 +57,9 @@ module.exports = {
     port: 'auto',
     open: true,
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'index.html',
+    }),
+  ],
 };
