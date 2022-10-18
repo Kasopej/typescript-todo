@@ -10,18 +10,19 @@ interface Task {
   createdAt: Date;
 }
 
-type Tasks = Array<Task>;
+export type Tasks = Array<Task>;
 
 const list = document.querySelector<HTMLUListElement>('#list');
 const form = document.querySelector<HTMLFormElement>('#new-task-form');
 const input = document.querySelector<HTMLInputElement>('#new-task-title');
-
-export const task: Task = {
+const task: Task = {
   id: '3',
   title: 'ddd',
   completed: false,
   createdAt: new Date(),
 };
+
+export { task };
 
 // const tasks: Tasks = loadTasks();
 // tasks.forEach((task) => {

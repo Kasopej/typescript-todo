@@ -1,5 +1,5 @@
 const { task } = require('@/index');
 
-test('test uuid string', () => {
+test('uuid string', () => {
   expect(task.id).toBe('3');
 });
