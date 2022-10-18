@@ -1,6 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const { fileURLToPath } = require('url');
+const { dirname } = require('path');
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 module.exports = {
   context: path.resolve(__dirname),
   target: 'browserslist',
