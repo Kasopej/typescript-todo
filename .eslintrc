@@ -11,6 +11,22 @@
         "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
+    "overrides": [
+        {
+            "files": [
+                "tests/**"
+            ],
+            "plugins": [
+                "jest"
+            ],
+            "extends": [
+                "plugin:jest/recommended"
+            ],
+            "rules": {
+                "jest/prefer-expect-assertions": "off"
+            }
+        }
+    ],
     "globals": {
         "require": "readonly",
         "module": "readonly",
