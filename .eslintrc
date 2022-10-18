@@ -13,7 +13,8 @@
     ],
     "globals": {
         "require": "readonly",
-        "module": "readonly"
+        "module": "readonly",
+        "__dirname": "readonly"
     },
     "rules": {
         "@typescript-eslint/no-var-requires": 0,

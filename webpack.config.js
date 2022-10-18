@@ -1,11 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
-const { fileURLToPath } = require('url');
-const { dirname } = require('path');
+// const { fileURLToPath } = require('url');
+// const { dirname } = require('path');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -66,6 +67,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
+    }),
+    new ESLintPlugin({
+      extensions: ['js', 'ts'],
     }),
   ],
 };
