@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { v4 as uuidV4 } from 'uuid';
 import 'bootstrap/scss/bootstrap.scss';
 import 'bootstrap';

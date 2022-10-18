@@ -1,6 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 // const { fileURLToPath } = require('url');
 // const { dirname } = require('path');
@@ -24,10 +29,10 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.css$/i, use: ['style-loader', 'css-loader'] },
+      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.js$/i,
@@ -68,8 +73,16 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html',
     }),
+    new MiniCssExtractPlugin(),
     new ESLintPlugin({
       extensions: ['js', 'ts'],
     }),
+    new ForkTsCheckerWebpackPlugin({}),
+    new ForkTsCheckerNotifierWebpackPlugin({
+      title: 'Type Check',
+    }),
   ],
+  optimization: {
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+  },
 };
