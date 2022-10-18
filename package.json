@@ -51,7 +51,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.(ts|tsx)": [
+    "src/**/*.(ts)": [
       "npm run --silent lint"
     ]
   },
