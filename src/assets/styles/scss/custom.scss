@@ -1,1 +1,14 @@
-@import 'bootstrap/scss/bootstrap.scss';
+@import 'base';
+
+.logo {
+    width: 30rem;
+    position: relative;
+
+    &::before {
+        content: icon;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        right: -10px;
+    }
+}
