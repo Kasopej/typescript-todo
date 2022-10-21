@@ -1,18 +1,45 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Todo App</title>
-</head>
+  </head>
 
-<body class="container-fluid m-4">
-    <h1 class="display-5 border logo rounded bg-secondary bi-alarm">Arange Your Life</h1>
+  <body class="container-fluid px-4">
+    <h1 class="mt-4 display-5 border logo rounded bg-success bi-alarm">
+      Arange Your Life
+    </h1>
     <main class="rounded border rounded-lg mt-5">
-        <!-- Elements added dynamically here -->
-        <h3 class="mb-4 mx-auto text-center">Nothing Here (Yet)</h3>
-        <button class="btn d-block mx-auto mt-5 mb-2 btn-success">Create Todo</button>
+      <!-- Elements added dynamically here -->
+      <h3 class="mb-4 mx-auto text-center my-2">Nothing Here</h3>
+      <button class="btn d-block mx-auto mt-5 mb-2 btn-success">
+        Create Todo
+      </button>
     </main>
-</body>
-
+    <div style="height: 20px"></div>
+    <main class="rounded border rounded-lg mt-5">
+      <!-- Elements added dynamically here -->
+      <h3 class="mb-4 my-2">Todos</h3>
+      <section class="d-flex py-2 todos">
+        <div class="card mx-2">
+          <div class="card-body">
+            <span class="card-heading">New</span>
+            <ul class="card-body">
+              <li class="bi bi-file-check">Reply mail</li>
+              <li class="bi bi-file-check">Purchase laptop</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card mx-1">
+          <div class="card-body">
+            <span class="card-heading">New</span>
+            <ul class="card-body">
+              <li class="bi bi-file-check">Reply mail</li>
+              <li class="bi bi-file-check">Purchase laptop</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
