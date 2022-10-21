@@ -1,14 +1,19 @@
-@import 'base';
+@import "base";
 
 .logo {
     width: 30rem;
     position: relative;
+    font-size: 2rem;
 
     &::before {
-        content: icon;
-        width: 10px;
-        height: 10px;
+        background-repeat: no-repeat;
+        background-size: 1rem 1rem;
         position: absolute;
-        right: -10px;
+        left: -500px;
+        transform: translate(0);
+        transition: all 4s ease-in;
+    }
+    &:hover::before{
+        left: calc(100% - 35px);
     }
 }
