@@ -96,10 +96,11 @@ module.exports = {
     hot: true,
     port: 'auto',
     open: true,
+    watchFiles: ['src/**/*'],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: 'src/index.html',
     }),
     new MiniCssExtractPlugin(),
     new ESLintPlugin({

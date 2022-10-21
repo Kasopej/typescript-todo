@@ -19,5 +19,5 @@ const input = document.querySelector<HTMLInputElement>('#new-task-title');
 const noTodosHTML: HTMLString = `<h3 class="mb-4 mx-auto text-center">Nothing Here (Yet)</h3>
 <button>Create Todo</button>`;
 
-const mainHTMLElement: HTMLElement = document.querySelector('main');
-mainHTMLElement.innerHTML = noTodosHTML;
+// const mainHTMLElement: HTMLElement = document.querySelector('main');
+// mainHTMLElement.innerHTML = noTodosHTML;

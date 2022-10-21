@@ -1,9 +1,10 @@
 @import "base";
 
 .logo {
-    width: 30rem;
+    width: 18rem;
     position: relative;
     font-size: 2rem;
+    overflow: hidden;
 
     &::before {
         background-repeat: no-repeat;
