@@ -1,45 +1,77 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Todo App</title>
-  </head>
 
-  <body class="container-fluid px-4">
-    <h1 class="mt-4 display-5 border logo rounded bg-success bi-alarm">
-      Arange Your Life
-    </h1>
-    <main class="rounded border rounded-lg mt-5">
-      <!-- Elements added dynamically here -->
-      <h3 class="mb-4 mx-auto text-center my-2">Nothing Here</h3>
-      <button class="btn d-block mx-auto mt-5 mb-2 btn-success">
-        Create Todo
-      </button>
-    </main>
-    <div style="height: 20px"></div>
-    <main class="rounded border rounded-lg mt-5">
-      <!-- Elements added dynamically here -->
-      <h3 class="mb-4 my-2">Todos</h3>
-      <section class="d-flex py-2 todos">
-        <div class="card mx-2">
-          <div class="card-body">
-            <span class="card-heading">New</span>
-            <ul class="card-body">
-              <li class="bi bi-file-check">Reply mail</li>
-              <li class="bi bi-file-check">Purchase laptop</li>
-            </ul>
+<head>
+  <meta charset="utf-8" />
+  <title>Todo App</title>
+</head>
+
+<body class="container-fluid px-4 py-5 bg-primary">
+  <div class="d-flex bg-white rounded-5">
+    <aside class="col-3 border-end border-secondary">
+      <figure class="figure">
+        <img src="" class="figure-img img-fluid rounded" alt="profile picture" />
+        <figcaption class="figure-caption text-start">Some Word</figcaption>
+      </figure>
+      <ul class="inline-list">
+        <li>
+          <div><span></span></div>
+        </li>
+        <li>
+          <div><span></span></div>
+        </li>
+        <li>
+          <div><span></span></div>
+        </li>
+      </ul>
+    </aside>
+    <main class="col-9">
+      <header>
+        <nav>
+          <ul class="nav nav-pills mb-3 justify-content-end" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                All
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                Pending
+              </button>
+            </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+              tabindex="0">
+              <!-- Slot in template instances here -->
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+              tabindex="0">
+              <!-- Slot in template instances here -->
+            </div>
           </div>
-        </div>
-        <div class="card mx-1">
-          <div class="card-body">
-            <span class="card-heading">New</span>
-            <ul class="card-body">
-              <li class="bi bi-file-check">Reply mail</li>
-              <li class="bi bi-file-check">Purchase laptop</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+        </nav>
+      </header>
     </main>
-  </body>
+  </div>
+  <template id="todo-template">
+    <div class="todo-container">
+      <button></button>
+      <p class="todo-main">
+      <h3 class="todo-heading">
+      </h3>
+      <span class="todo-timestamp">
+      </span>
+      </p>
+    </div>
+  </template>
+  <template id="no-todos-template">
+    <div>
+      NO TASKS YET!
+    </div>
+  </template>
+</body>
+
 </html>
