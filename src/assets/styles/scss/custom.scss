@@ -14,8 +14,38 @@
     }
 }
 
-.profile {
-    &.img-fluid {
-        width: 100%;
+aside {
+    .profile-img {
+        width: 60%;
+    }
+    .figure-caption {
+        margin-top: 1rem;
+    }
+    .stats {
+        & > li {
+            font-size: 1.5rem;
+            font-weight: 500;
+
+            .stats-description {
+                font-size: 0.85rem;
+                font-weight: initial;
+
+                span {
+                    margin-bottom: 0;
+                }
+            }
+        }
     }
 }
+
+.stats-description {
+    & > span {
+        display: block;
+    }
+}
+
+// ul.list-inline {
+//     li {
+//         display: inline-block;
+//     }
+// }

@@ -8,25 +8,42 @@
 
 <body class="container-fluid px-4 py-5 bg-primary">
   <div class="d-flex bg-white rounded-5">
-    <aside class="col-3 border-end border-secondary text-center">
-      <figure class="figure m-auto p-3">
-        <img src="assets/svg/person-badge-fill.svg" class="profile figure-img img-fluid text-success"
-          alt="profile picture" />
-        <figcaption class="figure-caption">Some Word</figcaption>
-      </figure>
-      <ul class="list-inline m-auto">
-        <li>
-          <div><span></span></div>
-        </li>
-        <li>
-          <div><span></span></div>
-        </li>
-        <li>
-          <div><span></span></div>
-        </li>
-      </ul>
+    <aside class="col-3 border-end border-secondary">
+      <div class="px-3 py-4 mb-2 text-center">
+        <figure class="figure m-auto px-2">
+          <img src="assets/svg/person-badge-fill.svg" class="profile-img" alt="profile picture" />
+          <figcaption class="figure-caption">
+            <span id="profile-name" class="h5">admin</span>
+            <br>
+            <span id="profile-email">g.alex@bk.ca</span>
+          </figcaption>
+        </figure>
+        <ul class="stats list-inline d-flex justify-content-between mt-4 m-auto">
+          <li>
+            4
+            <div class="stats-description">
+              <span class="h6">To do</span>
+              Tasks
+            </div>
+          </li>
+          <li>
+            4
+            <div class="stats-description">
+              <span class="h6">To do</span>
+              Tasks
+            </div>
+          </li>
+          <li>
+            4
+            <div class="stats-description">
+              <span class="h6">To do</span>
+              Tasks
+            </div>
+          </li>
+        </ul>
+      </div>
     </aside>
-    <main class="col-9">
+    <main class="col-9 p-3">
       <header>
         <nav>
           <ul class="nav nav-pills mb-3 justify-content-end" id="pills-tab" role="tablist">
@@ -59,12 +76,14 @@
   </div>
   <template id="todo-template">
     <div class="todo-container">
-      <i class="bi bi-check-circle-fill text-primary todo-status-btn"></i>
-      <div class="todo-main">
-        <h3 class="todo-heading">
+      <span class="todo-action-icons">
+        <i class="bi bi-check-circle-fill text-primary todo-status-btn"></i>
+      </span>
+      <div class="todo-main ms-3">
+        <h3 class="todo-heading mb-1">
           Finish design
         </h3>
-        <span class="d-block todo-timestamp">
+        <span class="d-block text-secondary small todo-timestamp">
           28/08/22 17:23:02
         </span>
       </div>
