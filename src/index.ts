@@ -12,12 +12,14 @@ interface Task {
 type HTMLString = string;
 type Tasks = Array<Task>;
 
-const list = document.querySelector<HTMLUListElement>('#list');
-const form = document.querySelector<HTMLFormElement>('#new-task-form');
+const allTodosPane = document.getElementById('pills-home');
 const input = document.querySelector<HTMLInputElement>('#new-task-title');
 
-const noTodosHTML: HTMLString = `<h3 class="mb-4 mx-auto text-center">Nothing Here (Yet)</h3>
-<button>Create Todo</button>`;
+const todoTemplate = document.getElementById(
+  'todo-template',
+) as HTMLTemplateElement;
 
+const todoTemplateClone = todoTemplate.content.cloneNode(true);
+allTodosPane.appendChild(todoTemplateClone);
 // const mainHTMLElement: HTMLElement = document.querySelector('main');
 // mainHTMLElement.innerHTML = noTodosHTML;
