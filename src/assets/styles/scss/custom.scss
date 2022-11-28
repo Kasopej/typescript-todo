@@ -15,8 +15,12 @@ body > div {
             font-size: 2rem;
         }
     }
-    button.position-absolute {
+}
+
+main {
+    & > button.position-absolute {
         bottom: 1rem;
+        left: calc(50% - 5rem);
     }
 }
 
