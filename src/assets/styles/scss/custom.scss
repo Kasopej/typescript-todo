@@ -1,5 +1,8 @@
 @import "base";
 
+body > div {
+    height: 85vh;
+}
 #pills-home {
     .todo-container {
         display: flex;
@@ -12,11 +15,14 @@
             font-size: 2rem;
         }
     }
+    button.position-absolute {
+        bottom: 1rem;
+    }
 }
 
 aside {
     .profile-img {
-        width: 60%;
+        width: 50%;
     }
     .figure-caption {
         margin-top: 1rem;
@@ -32,6 +38,24 @@ aside {
 
                 span {
                     margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+header {
+    .todos-nav {
+        h2 {
+            border-width: 0.8rem !important;
+        }
+        li {
+            display: inline-block;
+            & > button.nav-link {
+                border-radius: 1.2rem;
+                color: gray;
+                &.active {
+                    color: white;
                 }
             }
         }
