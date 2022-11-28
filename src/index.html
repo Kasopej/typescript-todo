@@ -8,12 +8,13 @@
 
 <body class="container-fluid px-4 py-5 bg-primary">
   <div class="d-flex bg-white rounded-5">
-    <aside class="col-3 border-end border-secondary">
-      <figure class="figure">
-        <img src="" class="figure-img img-fluid rounded" alt="profile picture" />
-        <figcaption class="figure-caption text-start">Some Word</figcaption>
+    <aside class="col-3 border-end border-secondary text-center">
+      <figure class="figure m-auto p-3">
+        <img src="assets/svg/person-badge-fill.svg" class="profile figure-img img-fluid text-success"
+          alt="profile picture" />
+        <figcaption class="figure-caption">Some Word</figcaption>
       </figure>
-      <ul class="inline-list">
+      <ul class="list-inline m-auto">
         <li>
           <div><span></span></div>
         </li>
@@ -58,13 +59,15 @@
   </div>
   <template id="todo-template">
     <div class="todo-container">
-      <button></button>
-      <p class="todo-main">
-      <h3 class="todo-heading">
-      </h3>
-      <span class="todo-timestamp">
-      </span>
-      </p>
+      <i class="bi bi-check-circle-fill text-primary todo-status-btn"></i>
+      <div class="todo-main">
+        <h3 class="todo-heading">
+          Finish design
+        </h3>
+        <span class="d-block todo-timestamp">
+          28/08/22 17:23:02
+        </span>
+      </div>
     </div>
   </template>
   <template id="no-todos-template">

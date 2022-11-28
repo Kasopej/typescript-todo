@@ -1,42 +1,21 @@
 @import "base";
 
-.logo {
-    width: 18rem;
-    position: relative;
-    font-size: 2rem;
-    overflow: hidden;
+#pills-home {
+    .todo-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: start;
+        align-items: center;
 
-    &::before {
-        background-repeat: no-repeat;
-        background-size: 1rem 1rem;
-        position: absolute;
-        left: -50px;
-        transform: translate(0);
-        transition: all 4s ease-in;
-    }
-    &:hover::before {
-        left: calc(100% - 35px);
-    }
-}
-
-main {
-    & > h3::after {
-        content: "(Yet!)";
-        margin-left: 2px;
-        border-bottom: solid 2px black;
-    }
-}
-
-.todos {
-    li {
-        position: relative;
-        list-style: none;
-
-        &::before {
-            position: absolute;
-            left: -20px;
-            transform: translateY(30%);
-            color: $green-500;
+        .todo-status-btn {
+            cursor: pointer;
+            font-size: 2rem;
         }
+    }
+}
+
+.profile {
+    &.img-fluid {
+        width: 100%;
     }
 }
