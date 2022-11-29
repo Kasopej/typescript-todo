@@ -19,11 +19,12 @@ const pendingTodosPane = document.getElementById('pills-pending-todos');
 const todoTemplate = document.getElementById(
   'todo-template',
 ) as HTMLTemplateElement;
-const emptyTodosTemplate = document.getElementById(
-  'no-todos-template',
-) as HTMLTemplateElement;
+
+const emptyTodos = Array.from(document.getElementsByClassName('empty-todos'));
 
 if (todos.length) {
+  emptyTodos.forEach((emptyTodoEl) => emptyTodoEl.classList.add('d-none'));
+
   todos.forEach((todo) => {
     const todoTemplateClone =
       todoTemplate.content.firstElementChild.cloneNode(true);
