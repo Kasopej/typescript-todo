@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './assets/styles/scss/custom.scss';
-import * as bootstrap from 'bootstrap';
+import 'bootstrap';
 
 interface Todo {
   id: string;
