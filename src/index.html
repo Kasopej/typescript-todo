@@ -7,6 +7,7 @@
 </head>
 
 <body class="container-fluid px-4 py-5">
+
   <div class="d-flex bg-white rounded-5">
     <aside class="col-3 border-end border-secondary">
       <div class="px-3 py-4 mb-2 text-center">
@@ -87,9 +88,36 @@
           <!-- Slot in template instances here (set empty todos markup to display:none) -->
         </div>
       </div>
-      <button class="new-todo-btn btn btn-md px-3 btn-primary text-center">New Todo</button>
+      <button class="new-todo-btn btn btn-md px-3 btn-primary text-center" data-bs-toggle="modal"
+        data-bs-target="#newTodoModal">New Todo</button>
     </main>
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="newTodoModal" tabindex="-1" aria-labelledby="newTodoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 h2" id="newTodoModalLabel">New Todo</h1>
+          <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="todo-description" class="form-label">
+            Description
+          </label>
+          <input type="text" class="form-control" name="todo-description" id="todo-description"
+            placeholder="Describe the task">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- TEMPLATES -->
   <!-- Todo template -->
   <template id="todo-template">
