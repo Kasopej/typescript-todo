@@ -6,7 +6,7 @@
   <title>Todo App</title>
 </head>
 
-<body class="container-fluid px-4 py-5 bg-primary">
+<body class="container-fluid px-4 py-5">
   <div class="d-flex bg-white rounded-5">
     <aside class="col-3 border-end border-secondary">
       <div class="px-3 py-4 mb-2 text-center">
@@ -48,7 +48,7 @@
         <nav>
           <ul class="todos-nav nav nav-pills mb-3 justify-content-start" id="pills-tab" role="tablist">
             <div>
-              <h2 class="border-start border-primary ps-2 fw-normal">Todos</h2>
+              <h2 class="border-start border-primary-200 ps-2 fw-normal">Todos</h2>
             </div>
             <div class="ms-auto">
               <li class="nav-item" role="presentation">
@@ -78,13 +78,13 @@
           </div>
         </nav>
       </header>
-      <button class="position-absolute btn btn-md px-5 btn-primary">New Todo</button>
+      <button class="position-absolute new-todo-btn btn btn-md px-3 btn-primary text-center">New Todo</button>
     </main>
   </div>
   <template id="todo-template">
     <div class="todo-container">
       <span class="todo-action-icons">
-        <i class="bi bi-check-circle-fill text-primary todo-status-btn"></i>
+        <i class="bi bi-check-circle-fill text-primary-300 todo-status-btn"></i>
       </span>
       <div class="todo-main ms-3">
         <h3 class="todo-heading mb-1">
