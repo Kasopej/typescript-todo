@@ -1,7 +1,10 @@
 @import "base";
 
-body > div {
-    height: 85vh;
+body {
+    background-color: mix(black, $blue, 10);
+    & > div {
+        height: 85vh;
+    }
 }
 #pills-home {
     .todo-container {
@@ -14,13 +17,6 @@ body > div {
             cursor: pointer;
             font-size: 2rem;
         }
-    }
-}
-
-main {
-    & > button.position-absolute {
-        bottom: 1rem;
-        left: calc(50% - 5rem);
     }
 }
 
@@ -42,6 +38,7 @@ aside {
 
                 span {
                     margin-bottom: 0;
+                    display: block;
                 }
             }
         }
@@ -60,20 +57,17 @@ header {
                 color: gray;
                 &.active {
                     color: white;
+                    background-color: $blue-300;
                 }
             }
         }
     }
 }
 
-.stats-description {
-    & > span {
-        display: block;
-    }
+.new-todo-btn {
+    bottom: 2rem;
+    left: calc(50% - 6rem);
+    width: 12rem;
+    border: none;
+    background-image: linear-gradient(to right, $blue-400, $blue-800);
 }
-
-// ul.list-inline {
-//     li {
-//         display: inline-block;
-//     }
-// }

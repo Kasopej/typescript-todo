@@ -7,8 +7,19 @@
 
 // 4. Include any default map overrides here
 
+$primary-variants-map: ();
+@for $i from 1 to 9 {
+    $primary-variants-map: map-merge(
+        $primary-variants-map,
+        (
+            "primary-#{$i}00": map-get($blues, "blue-#{$i}00"),
+        )
+    );
+}
+$theme-colors: map-merge($theme-colors, $primary-variants-map);
 // 5. Include remainder of required parts
 @import "bootstrap/scss/maps";
+
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/root";
 
