@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './assets/styles/scss/custom.scss';
-import 'bootstrap';
+import * as bootstrap from 'bootstrap';
 
 interface Todo {
   id: string;
@@ -23,14 +23,10 @@ const emptyTodosTemplate = document.getElementById(
   'no-todos-template',
 ) as HTMLTemplateElement;
 
-if (!todos.length) {
-  const emptyTemplateClone =
-    emptyTodosTemplate.content.firstElementChild.cloneNode(true);
-  allTodosPane.appendChild(emptyTemplateClone);
-  pendingTodosPane.appendChild(emptyTemplateClone.cloneNode(true));
-} else {
+if (todos.length) {
   todos.forEach((todo) => {
-    const todoTemplateClone = todoTemplate.content.cloneNode(true);
+    const todoTemplateClone =
+      todoTemplate.content.firstElementChild.cloneNode(true);
     allTodosPane.appendChild(todoTemplateClone);
   });
 }

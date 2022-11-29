@@ -45,7 +45,7 @@ aside {
     }
 }
 
-header {
+main {
     .todos-nav {
         h2 {
             border-width: 0.8rem !important;
@@ -62,9 +62,15 @@ header {
             }
         }
     }
+    .empty-todos {
+        i {
+            font-size: 10rem;
+        }
+    }
 }
 
 .new-todo-btn {
+    position: absolute;
     bottom: 2rem;
     left: calc(50% - 6rem);
     width: 12rem;
