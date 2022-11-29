@@ -14,7 +14,8 @@ type Todos = Array<Todo>;
 const todosInStore = JSON.parse(localStorage.getItem('todos'));
 const todos: Todos = todosInStore ? todosInStore : [];
 
-const allTodosPane = document.getElementById('pills-home');
+const allTodosPane = document.getElementById('pills-all-todos');
+const pendingTodosPane = document.getElementById('pills-pending-todos');
 const todoTemplate = document.getElementById(
   'todo-template',
 ) as HTMLTemplateElement;
@@ -23,8 +24,10 @@ const emptyTodosTemplate = document.getElementById(
 ) as HTMLTemplateElement;
 
 if (!todos.length) {
-  const emptyTemplateClone = emptyTodosTemplate.content.cloneNode(true);
+  const emptyTemplateClone =
+    emptyTodosTemplate.content.firstElementChild.cloneNode(true);
   allTodosPane.appendChild(emptyTemplateClone);
+  pendingTodosPane.appendChild(emptyTemplateClone.cloneNode(true));
 } else {
   todos.forEach((todo) => {
     const todoTemplateClone = todoTemplate.content.cloneNode(true);
