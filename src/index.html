@@ -111,7 +111,7 @@
             placeholder="Describe the task">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-primary" id="new-todo-btn">Save</button>
         </div>
       </div>
     </div>
@@ -123,11 +123,10 @@
   <template id="todo-template">
     <div class="todo-container">
       <span class="todo-action-icons">
-        <i class="bi bi-check-circle-fill text-primary-300 todo-status-btn"></i>
+        <i class="bi text-secondary todo-status-btn"></i>
       </span>
       <div class="todo-main ms-3">
-        <h3 class="todo-heading mb-1">
-        </h3>
+        <input class="todo-heading mb-1 border-0" type="text" readonly>
         <span class="d-block text-secondary small todo-timestamp">
           <!-- 28/08/22 17:23:02 -->
         </span>

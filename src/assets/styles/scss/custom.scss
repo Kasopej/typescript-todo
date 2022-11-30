@@ -67,6 +67,16 @@ main {
             font-size: 10rem;
         }
     }
+    .todo-container {
+        input.todo-heading:focus {
+            border: none !important;
+            border-bottom: 1px black;
+        }
+        .bi-check-circle-fill {
+            color: $blue-300 !important;
+            // override text-secondary on checkmark icon
+        }
+    }
 }
 
 .new-todo-btn {
