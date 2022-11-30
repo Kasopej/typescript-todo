@@ -57,7 +57,6 @@ function appendTodoToDom(todo: Todo) {
   todoTemplateInput.addEventListener('click', function () {
     this.readOnly = false;
   });
-  //TODO: edit todo via input element. Create function for this
 
   todoTemplateClone.getElementsByClassName('todo-timestamp')[0].textContent =
     new Date(todo.createdAt).toTimeString();
@@ -76,6 +75,9 @@ function toggleEmptyTodoElements(toggle: toggle) {
     else emptyTodoEl.classList.remove('d-none');
   });
 }
+
+//TODO: edit todo via input element. Create function for this
+//TODO: make addition of new todo smooth via CSS move transition/animation
 
 //
 //retrieve Todos from store
