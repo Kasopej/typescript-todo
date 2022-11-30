@@ -78,6 +78,14 @@ function toggleEmptyTodoElements(toggle: toggle) {
 
 //TODO: edit todo via input element. Create function for this
 //TODO: make addition of new todo smooth via CSS move transition/animation
+//TODO: add login page via webpack multi entry feature.
+/*
+useful guides for webpack multi entry config:
+https://stackoverflow.com/questions/61446198/webpack-when-using-2-entry-files-both-files-include-the-same-css-is-there-a
+https://webpack.js.org/guides/output-management/
+https://webpack.js.org/plugins/split-chunks-plugin/
+https://survivejs.com/webpack/output/multiple-pages/
+*/
 
 //
 //retrieve Todos from store
