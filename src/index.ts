@@ -11,6 +11,7 @@ interface Todo {
 type Todos = Array<Todo>;
 type toggle = 'show' | 'hide';
 
+//Elements from DOM
 const allTodosPane = document.getElementById('pills-all-todos');
 const pendingTodosPane = document.getElementById('pills-pending-todos');
 const createTodoModal = document.getElementById('newTodoModal');
@@ -24,57 +25,6 @@ const todoTemplate = document.getElementById(
 const emptyTodoElements = Array.from(
   document.getElementsByClassName('empty-todos'),
 );
-
-function createTodo(todoText: string, todos: Todos): Todo {
-  let nextId = 1;
-
-  todos.forEach((todo) => {
-    nextId = todo.id > nextId ? todo.id + 1 : nextId;
-  });
-
-  const newTodo =
-    todos[
-      todos.push({
-        id: nextId,
-        description: todoText,
-        completed: false,
-        createdAt: new Date(),
-      }) - 1
-    ];
-  localStorage.setItem('todos', JSON.stringify(todos));
-  return newTodo;
-}
-
-function appendTodoToDom(todo: Todo) {
-  const todoTemplateClone = todoTemplate.content.firstElementChild?.cloneNode(
-    true,
-  ) as HTMLElement;
-
-  const todoTemplateInput = todoTemplateClone.getElementsByTagName(
-    'input',
-  )[0] as HTMLInputElement;
-  todoTemplateInput.value = todo.description;
-  todoTemplateInput.addEventListener('click', function () {
-    this.readOnly = false;
-  });
-
-  todoTemplateClone.getElementsByClassName('todo-timestamp')[0].textContent =
-    new Date(todo.createdAt).toTimeString();
-  const todoTemplateStatusBtn =
-    todoTemplateClone.getElementsByClassName('todo-status-btn')[0];
-
-  allTodosPane.appendChild(todoTemplateClone);
-  if (todo.completed)
-    todoTemplateStatusBtn.classList.add('bi-check-circle-fill');
-  else todoTemplateStatusBtn.classList.add('bi-check-circle');
-}
-
-function toggleEmptyTodoElements(toggle: toggle) {
-  emptyTodoElements.forEach((emptyTodoEl) => {
-    if (toggle === 'hide') emptyTodoEl.classList.add('d-none');
-    else emptyTodoEl.classList.remove('d-none');
-  });
-}
 
 //TODO: edit todo via input element. Create function for this
 //TODO: make addition of new todo smooth via CSS move transition/animation
@@ -102,5 +52,58 @@ if (todos.length) {
 
   todos.forEach((todo) => {
     appendTodoToDom(todo);
+  });
+}
+
+function createTodo(todoText: string, todos: Todos): Todo {
+  let nextId = 1;
+
+  todos.forEach((todo) => {
+    nextId = todo.id > nextId ? todo.id + 1 : nextId;
+  });
+
+  const newTodoIndex =
+    todos.push({
+      id: nextId,
+      description: todoText,
+      completed: false,
+      createdAt: new Date(),
+    }) - 1;
+
+  localStorage.setItem('todos', JSON.stringify(todos));
+  return todos[newTodoIndex];
+}
+
+function appendTodoToDom(todo: Todo) {
+  const todoTemplateClone = todoTemplate.content.firstElementChild?.cloneNode(
+    true,
+  ) as HTMLElement;
+
+  //attach listener to todo element input el
+  const [todoTemplateInput] = Array.from(
+    todoTemplateClone.getElementsByTagName('input'),
+  ) as Array<HTMLInputElement>;
+
+  todoTemplateInput.value = todo.description;
+  todoTemplateInput.addEventListener('click', function () {
+    this.readOnly = false;
+  });
+
+  todoTemplateClone.getElementsByClassName('todo-timestamp')[0].textContent =
+    new Date(todo.createdAt).toTimeString();
+  const [todoTemplateStatusIcon] = Array.from(
+    todoTemplateClone.getElementsByClassName('todo-status-icon'),
+  );
+
+  allTodosPane.appendChild(todoTemplateClone);
+  if (todo.completed)
+    todoTemplateStatusIcon.classList.add('bi-check-circle-fill');
+  else todoTemplateStatusIcon.classList.add('bi-check-circle');
+}
+
+function toggleEmptyTodoElements(toggle: toggle) {
+  emptyTodoElements.forEach((emptyTodoEl) => {
+    if (toggle === 'hide') emptyTodoEl.classList.add('d-none');
+    else emptyTodoEl.classList.remove('d-none');
   });
 }
