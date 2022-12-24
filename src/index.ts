@@ -26,6 +26,7 @@ const todoTemplate = document.getElementById(
 const emptyTodoElements = Array.from(
   document.getElementsByClassName('empty-todos'),
 );
+const statsListContainer = document.getElementsByClassName('stats')[0];
 
 //TODO: add login page via webpack multi entry feature.
 /*
@@ -154,4 +155,19 @@ function updateDom(): void {
   pendingTodos.forEach((todo) =>
     appendTodoToDom(todo, pendingTodosPane.children[1]),
   );
+
+  updateStatistics();
+}
+
+function updateStatistics(): void {
+  const pendingTodos = todos.filter((todo) => !todo.completed);
+  statsListContainer.getElementsByClassName(
+    'stats-all',
+  )[0].childNodes[0].nodeValue = String(todos.length);
+  statsListContainer.getElementsByClassName(
+    'stats-pending',
+  )[0].childNodes[0].nodeValue = String(pendingTodos.length);
+  statsListContainer.getElementsByClassName(
+    'stats-completed',
+  )[0].childNodes[0].nodeValue = String(todos.length - pendingTodos.length);
 }
