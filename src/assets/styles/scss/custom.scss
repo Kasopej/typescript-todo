@@ -68,6 +68,12 @@ main {
         }
     }
     .todo-container {
+        position: relative;
+        &.slide {
+            animation-name: slide-in;
+            animation-duration: 1000ms;
+            animation-timing-function: ease-in;
+        }
         input.todo-heading:focus {
             border: none !important;
             border-bottom: 1px black;
@@ -87,4 +93,13 @@ main {
     width: 12rem;
     border: none;
     background-image: linear-gradient(to right, $blue-400, $blue-800);
+}
+
+@keyframes slide-in {
+    from {
+        left: 100vw;
+    }
+    to {
+        left: 0;
+    }
 }

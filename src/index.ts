@@ -27,7 +27,6 @@ const emptyTodoElements = Array.from(
   document.getElementsByClassName('empty-todos'),
 );
 
-//TODO: make addition of new todo smooth via CSS move transition/animation
 //TODO: add login page via webpack multi entry feature.
 /*
 useful guides for webpack multi entry config:
@@ -52,7 +51,7 @@ if (todos.length) {
 
 createTodoButton.addEventListener('click', () => {
   if (!createTodoInput.value) return;
-  appendTodoToDom(createTodo(createTodoInput.value, todos));
+  appendTodoToDom(createTodo(createTodoInput.value, todos), true);
 });
 
 function createTodo(todoText: string, todos: Todos): Todo {
@@ -74,7 +73,7 @@ function createTodo(todoText: string, todos: Todos): Todo {
   return todos[newTodoIndex];
 }
 
-function appendTodoToDom(todo: Todo) {
+function appendTodoToDom(todo: Todo, animate?: boolean) {
   const todoTemplateClone = todoTemplate.content.firstElementChild?.cloneNode(
     true,
   ) as HTMLElement;
@@ -98,6 +97,10 @@ function appendTodoToDom(todo: Todo) {
     todoTemplateClone.getElementsByClassName('todo-status-icon'),
   );
 
+  if (animate) {
+    animateTodoElement(todoTemplateClone);
+  }
+
   allTodosPane.appendChild(todoTemplateClone);
   if (todo.completed)
     todoTemplateStatusIcon.classList.add('bi-check-circle-fill');
@@ -111,8 +114,12 @@ function toggleEmptyTodoElements(toggle: toggle) {
   });
 }
 
+function animateTodoElement(todoElement: HTMLElement) {
+  todoElement.classList.add('slide');
+  setTimeout(() => todoElement.classList.remove('slide'), 2000);
+}
+
 function editTodo() {
   todos.find((todo) => todo.id == this.id).description = this.value;
-  console.log('saving');
   localStorage.setItem('todos', JSON.stringify(todos));
 }
