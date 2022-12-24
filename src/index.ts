@@ -28,15 +28,6 @@ const emptyTodoElements = Array.from(
 );
 const statsListContainer = document.getElementsByClassName('stats')[0];
 
-//TODO: add login page via webpack multi entry feature.
-/*
-useful guides for webpack multi entry config:
-https://stackoverflow.com/questions/61446198/webpack-when-using-2-entry-files-both-files-include-the-same-css-is-there-a
-https://webpack.js.org/guides/output-management/
-https://webpack.js.org/plugins/split-chunks-plugin/
-https://survivejs.com/webpack/output/multiple-pages/
-*/
-
 //
 //retrieve Todos from store
 const todosInStore = JSON.parse(localStorage.getItem('todos'));

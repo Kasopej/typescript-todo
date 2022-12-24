@@ -10,7 +10,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   context: path.resolve(__dirname),
   target: 'browserslist',
-  entry: ['./src/index.ts'],
+  entry: { main: './src/index.ts', login: './src/login.ts' },
   output: {
     filename: '[name].[contenthash].bundle.js',
     asyncChunks: true,
@@ -101,6 +101,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
+      filename: 'index.html',
+      excludeChunks: ['login'],
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/login.html',
+      filename: 'login/index.html',
+      excludeChunks: ['main'],
     }),
     new MiniCssExtractPlugin(),
     new ESLintPlugin({
