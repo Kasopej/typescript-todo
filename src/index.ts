@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './assets/styles/scss/custom.scss';
 import 'bootstrap';
+import debounce from '@/utils/debounce';
 
 interface Todo {
   id: number;
@@ -26,7 +27,6 @@ const emptyTodoElements = Array.from(
   document.getElementsByClassName('empty-todos'),
 );
 
-//TODO: edit todo via input element. Create function for this
 //TODO: make addition of new todo smooth via CSS move transition/animation
 //TODO: add login page via webpack multi entry feature.
 /*
@@ -40,12 +40,7 @@ https://survivejs.com/webpack/output/multiple-pages/
 //
 //retrieve Todos from store
 const todosInStore = JSON.parse(localStorage.getItem('todos'));
-const todos: Todos = todosInStore ? todosInStore : [];
-
-createTodoButton.addEventListener('click', () => {
-  if (!createTodoInput.value) return;
-  appendTodoToDom(createTodo(createTodoInput.value, todos));
-});
+const todos: Todos = todosInStore ?? [];
 
 if (todos.length) {
   toggleEmptyTodoElements('hide');
@@ -54,6 +49,11 @@ if (todos.length) {
     appendTodoToDom(todo);
   });
 }
+
+createTodoButton.addEventListener('click', () => {
+  if (!createTodoInput.value) return;
+  appendTodoToDom(createTodo(createTodoInput.value, todos));
+});
 
 function createTodo(todoText: string, todos: Todos): Todo {
   let nextId = 1;
@@ -79,18 +79,21 @@ function appendTodoToDom(todo: Todo) {
     true,
   ) as HTMLElement;
 
-  //attach listener to todo element input el
   const [todoTemplateInput] = Array.from(
     todoTemplateClone.getElementsByTagName('input'),
   ) as Array<HTMLInputElement>;
 
+  //attach data & listeners to todo elements
+  todoTemplateInput.id = String(todo.id);
   todoTemplateInput.value = todo.description;
-  todoTemplateInput.addEventListener('click', function () {
+  todoTemplateInput.addEventListener('focusin', function () {
     this.readOnly = false;
   });
-
+  todoTemplateInput.addEventListener('input', debounce(editTodo, 500));
   todoTemplateClone.getElementsByClassName('todo-timestamp')[0].textContent =
     new Date(todo.createdAt).toTimeString();
+
+  //attach styles for todo icons
   const [todoTemplateStatusIcon] = Array.from(
     todoTemplateClone.getElementsByClassName('todo-status-icon'),
   );
@@ -106,4 +109,10 @@ function toggleEmptyTodoElements(toggle: toggle) {
     if (toggle === 'hide') emptyTodoEl.classList.add('d-none');
     else emptyTodoEl.classList.remove('d-none');
   });
+}
+
+function editTodo() {
+  todos.find((todo) => todo.id == this.id).description = this.value;
+  console.log('saving');
+  localStorage.setItem('todos', JSON.stringify(todos));
 }
