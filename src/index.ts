@@ -42,39 +42,45 @@ const todosInStore = JSON.parse(localStorage.getItem('todos'));
 const todos: Todos = todosInStore ?? [];
 
 if (todos.length) {
-  toggleEmptyTodoElements('hide');
+  toggleElementDisplay('hide', emptyTodoElements[0]);
 
   todos.forEach((todo) => {
-    appendTodoToDom(todo);
+    appendTodoToDom(todo, allTodosPane.children[1]);
   });
+  updateDom();
 }
 
 createTodoButton.addEventListener('click', () => {
   if (!createTodoInput.value) return;
-  appendTodoToDom(createTodo(createTodoInput.value, todos), true);
-  if (todos.length === 1) toggleEmptyTodoElements('hide');
+  createTodo(createTodoInput.value, todos);
 });
 
-function createTodo(todoText: string, todos: Todos): Todo {
+function createTodo(todoText: string, todos: Todos): void {
   let nextId = 1;
 
   todos.forEach((todo) => {
     nextId = todo.id >= nextId ? todo.id + 1 : nextId;
   });
-
-  const newTodoIndex =
-    todos.push({
-      id: nextId,
-      description: todoText,
-      completed: false,
-      createdAt: new Date(),
-    }) - 1;
+  todos.push({
+    id: nextId,
+    description: todoText,
+    completed: false,
+    createdAt: new Date(),
+  });
 
   localStorage.setItem('todos', JSON.stringify(todos));
-  return todos[newTodoIndex];
+  updateDom();
 }
 
-function appendTodoToDom(todo: Todo, animate?: boolean) {
+function editTodo(): void {
+  const todo: Todo = todos.find((todo) => todo.id == this.id);
+  if (todo.completed) return;
+  todo.description = this.value;
+  localStorage.setItem('todos', JSON.stringify(todos));
+  updateDom();
+}
+
+function appendTodoToDom(todo: Todo, rootNode: Element, animate?: boolean) {
   const todoTemplateClone = todoTemplate.content.firstElementChild?.cloneNode(
     true,
   ) as HTMLElement;
@@ -103,7 +109,7 @@ function appendTodoToDom(todo: Todo, animate?: boolean) {
     animateTodoElement(todoTemplateClone);
   }
 
-  allTodosPane.appendChild(todoTemplateClone);
+  rootNode.appendChild(todoTemplateClone);
   if (todo.completed)
     todoTemplateStatusIcon.classList.add('bi-check-circle-fill');
   else {
@@ -114,11 +120,9 @@ function appendTodoToDom(todo: Todo, animate?: boolean) {
   }
 }
 
-function toggleEmptyTodoElements(toggle: toggle) {
-  emptyTodoElements.forEach((emptyTodoEl) => {
-    if (toggle === 'hide') emptyTodoEl.classList.add('d-none');
-    else emptyTodoEl.classList.remove('d-none');
-  });
+function toggleElementDisplay(toggle: toggle, element: Element) {
+  if (toggle === 'hide') element.classList.add('d-none');
+  else element.classList.remove('d-none');
 }
 
 function animateTodoElement(todoElement: HTMLElement) {
@@ -126,16 +130,28 @@ function animateTodoElement(todoElement: HTMLElement) {
   setTimeout(() => todoElement.classList.remove('slide'), 2000);
 }
 
-function editTodo(): void {
-  const todo: Todo = todos.find((todo) => todo.id == this.id);
-  if (todo.completed) return;
-  todo.description = this.value;
-  localStorage.setItem('todos', JSON.stringify(todos));
-}
-
 function completeTodo(): void {
   todos.find((todo) => todo.id == this.id).completed = true;
-  this.classList.add('bi-check-circle-fill');
-  this.classList.remove('bi-check-circle');
   localStorage.setItem('todos', JSON.stringify(todos));
+  updateDom();
+}
+
+function updateDom(): void {
+  const pendingTodos = todos.filter((todo) => !todo.completed);
+  const pendingTodoPaneEmptyElemToggle: toggle = pendingTodos.length
+    ? 'hide'
+    : 'show';
+  const allTodoPaneEmptyElemToggle: toggle = todos.length ? 'hide' : 'show';
+  toggleElementDisplay(pendingTodoPaneEmptyElemToggle, emptyTodoElements[1]);
+  toggleElementDisplay(allTodoPaneEmptyElemToggle, emptyTodoElements[0]);
+
+  pendingTodosPane.children[1].textContent = '';
+  allTodosPane.children[1].textContent = '';
+
+  todos.forEach((todo) => {
+    appendTodoToDom(todo, allTodosPane.children[1]);
+  });
+  pendingTodos.forEach((todo) =>
+    appendTodoToDom(todo, pendingTodosPane.children[1]),
+  );
 }

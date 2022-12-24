@@ -6,7 +6,8 @@ body {
         height: 85vh;
     }
 }
-#pills-all-todos {
+#pills-all-todos,
+#pills-pending-todos {
     .todo-container {
         display: flex;
         flex-flow: row nowrap;
