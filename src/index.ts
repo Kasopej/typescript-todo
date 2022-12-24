@@ -52,13 +52,14 @@ if (todos.length) {
 createTodoButton.addEventListener('click', () => {
   if (!createTodoInput.value) return;
   appendTodoToDom(createTodo(createTodoInput.value, todos), true);
+  if (todos.length === 1) toggleEmptyTodoElements('hide');
 });
 
 function createTodo(todoText: string, todos: Todos): Todo {
   let nextId = 1;
 
   todos.forEach((todo) => {
-    nextId = todo.id > nextId ? todo.id + 1 : nextId;
+    nextId = todo.id >= nextId ? todo.id + 1 : nextId;
   });
 
   const newTodoIndex =
@@ -96,6 +97,7 @@ function appendTodoToDom(todo: Todo, animate?: boolean) {
   const [todoTemplateStatusIcon] = Array.from(
     todoTemplateClone.getElementsByClassName('todo-status-icon'),
   );
+  todoTemplateStatusIcon.id = String(todo.id);
 
   if (animate) {
     animateTodoElement(todoTemplateClone);
@@ -104,7 +106,12 @@ function appendTodoToDom(todo: Todo, animate?: boolean) {
   allTodosPane.appendChild(todoTemplateClone);
   if (todo.completed)
     todoTemplateStatusIcon.classList.add('bi-check-circle-fill');
-  else todoTemplateStatusIcon.classList.add('bi-check-circle');
+  else {
+    todoTemplateStatusIcon.classList.add('bi-check-circle');
+    todoTemplateStatusIcon.addEventListener('click', completeTodo, {
+      once: true,
+    });
+  }
 }
 
 function toggleEmptyTodoElements(toggle: toggle) {
@@ -119,7 +126,14 @@ function animateTodoElement(todoElement: HTMLElement) {
   setTimeout(() => todoElement.classList.remove('slide'), 2000);
 }
 
-function editTodo() {
+function editTodo(): void {
   todos.find((todo) => todo.id == this.id).description = this.value;
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function completeTodo(): void {
+  todos.find((todo) => todo.id == this.id).completed = true;
+  this.classList.add('bi-check-circle-fill');
+  this.classList.remove('bi-check-circle');
   localStorage.setItem('todos', JSON.stringify(todos));
 }
