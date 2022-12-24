@@ -87,7 +87,7 @@ function appendTodoToDom(todo: Todo, animate?: boolean) {
   todoTemplateInput.id = String(todo.id);
   todoTemplateInput.value = todo.description;
   todoTemplateInput.addEventListener('focusin', function () {
-    this.readOnly = false;
+    if (!todo.completed) this.readOnly = false;
   });
   todoTemplateInput.addEventListener('input', debounce(editTodo, 500));
   todoTemplateClone.getElementsByClassName('todo-timestamp')[0].textContent =
@@ -127,7 +127,9 @@ function animateTodoElement(todoElement: HTMLElement) {
 }
 
 function editTodo(): void {
-  todos.find((todo) => todo.id == this.id).description = this.value;
+  const todo: Todo = todos.find((todo) => todo.id == this.id);
+  if (todo.completed) return;
+  todo.description = this.value;
   localStorage.setItem('todos', JSON.stringify(todos));
 }
 
