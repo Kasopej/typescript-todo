@@ -30,6 +30,8 @@ const todoTemplate = document.getElementById(
 const emptyTodoElements = Array.from(
   document.getElementsByClassName('empty-todos'),
 );
+const emailDisplay = document.getElementById('profile-email');
+emailDisplay.innerText = localStorage.getItem('email');
 const statsListContainer = document.getElementsByClassName('stats')[0];
 
 //

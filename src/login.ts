@@ -1,5 +1,8 @@
 import '@/assets/styles/scss/login.scss';
 
+localStorage.getItem('access_token')
+  ? (location.href = '/')
+  : document.getElementsByTagName('main')[0].classList.remove('d-none');
 const formElement: Element = document.getElementsByTagName('form')[0];
 const emailInputElem = document.getElementById('username') as HTMLInputElement;
 const passwordInputElem = document.getElementById(
@@ -44,6 +47,7 @@ function login(event?: Event): void {
     .then((res) => res.json() as Promise<{ token: string }>)
     .then(({ token }) => {
       localStorage.setItem('access_token', token);
+      localStorage.setItem('email', emailInputElem.value);
       location.href = '/';
     });
 }
