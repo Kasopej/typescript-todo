@@ -3,6 +3,10 @@ import './assets/styles/scss/custom.scss';
 import 'bootstrap';
 import debounce from '@/utils/debounce';
 
+!localStorage.getItem('access_token')
+  ? (location.href = 'login')
+  : document.getElementsByTagName('main')[0].classList.remove('d-none');
+
 interface Todo {
   id: number;
   description: string;

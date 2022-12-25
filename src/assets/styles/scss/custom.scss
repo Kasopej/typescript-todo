@@ -2,8 +2,8 @@
 
 body {
     background-color: mix(black, $blue, 10);
-    & > div {
-        height: 85vh;
+    & > main {
+        min-height: 85vh;
     }
 }
 #pills-all-todos,
@@ -14,6 +14,9 @@ body {
         justify-content: start;
         align-items: center;
 
+        &:last-child {
+            margin-bottom: 5rem;
+        }
         .todo-status-icon {
             cursor: pointer;
             font-size: 2rem;
@@ -46,7 +49,7 @@ aside {
     }
 }
 
-main {
+section {
     .todos-nav {
         h2 {
             border-width: 0.8rem !important;
