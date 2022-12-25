@@ -123,8 +123,8 @@
   <!-- Todo template -->
   <template id="todo-template">
     <div class="todo-container">
-      <span class="todo-action-icons">
-        <i class="bi text-secondary todo-status-icon"></i>
+      <span>
+        <i class="bi text-secondary todo-action-icons todo-status-icon"></i>
       </span>
       <div class="todo-main ms-3">
         <input class="todo-heading mb-1 border-0" type="text" readonly>
@@ -132,6 +132,9 @@
           <!-- 28/08/22 17:23:02 -->
         </span>
       </div>
+      <span class="ms-2 mt-4">
+        <i class="bi bi-x-circle-fill text-secondary todo-action-icons todo-delete-icon"></i>
+      </span>
     </div>
   </template>
 </body>

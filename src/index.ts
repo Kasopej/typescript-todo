@@ -51,6 +51,10 @@ createTodoButton.addEventListener('click', () => {
   createTodo(createTodoInput.value, todos);
 });
 
+createTodoInput.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Enter') createTodoButton.dispatchEvent(new Event('click'));
+});
+
 function createTodo(todoText: string, todos: Todos): void {
   let nextId = 1;
 
@@ -81,39 +85,40 @@ function appendTodoToDom(todo: Todo, rootNode: Element, animate?: boolean) {
     true,
   ) as HTMLElement;
 
-  const [todoTemplateInput] = Array.from(
+  const [todoInputElem] = Array.from(
     todoTemplateClone.getElementsByTagName('input'),
   ) as Array<HTMLInputElement>;
 
   //attach data & listeners to todo elements
-  todoTemplateInput.id = String(todo.id);
-  todoTemplateInput.value = todo.description;
-  todoTemplateInput.addEventListener('focusin', function () {
+  todoInputElem.id = String(todo.id);
+  todoInputElem.value = todo.description;
+  todoInputElem.addEventListener('focusin', function () {
     if (!todo.completed) this.readOnly = false;
   });
-  todoTemplateInput.addEventListener('input', debounce(editTodo, 500));
+  todoInputElem.addEventListener('input', debounce(editTodo, 500));
   todoTemplateClone.getElementsByClassName('todo-timestamp')[0].textContent =
     new Date(todo.createdAt).toTimeString();
 
   //attach styles for todo icons
-  const [todoTemplateStatusIcon] = Array.from(
-    todoTemplateClone.getElementsByClassName('todo-status-icon'),
+  const [todoStatusIcon, todoDeleteIcon] = Array.from(
+    todoTemplateClone.getElementsByClassName('todo-action-icons'),
   );
-  todoTemplateStatusIcon.id = String(todo.id);
+  todoStatusIcon.id = String(todo.id);
+  todoDeleteIcon.id = String(todo.id);
 
   if (animate) {
     animateTodoElement(todoTemplateClone);
   }
 
-  rootNode.appendChild(todoTemplateClone);
-  if (todo.completed)
-    todoTemplateStatusIcon.classList.add('bi-check-circle-fill');
+  todoDeleteIcon.addEventListener('click', deleteTodo);
+  if (todo.completed) todoStatusIcon.classList.add('bi-check-circle-fill');
   else {
-    todoTemplateStatusIcon.classList.add('bi-check-circle');
-    todoTemplateStatusIcon.addEventListener('click', completeTodo, {
+    todoStatusIcon.classList.add('bi-check-circle');
+    todoStatusIcon.addEventListener('click', completeTodo, {
       once: true,
     });
   }
+  rootNode.appendChild(todoTemplateClone);
 }
 
 function toggleElementDisplay(toggle: toggle, element: Element) {
@@ -123,7 +128,7 @@ function toggleElementDisplay(toggle: toggle, element: Element) {
 
 function animateTodoElement(todoElement: HTMLElement) {
   todoElement.classList.add('slide');
-  setTimeout(() => todoElement.classList.remove('slide'), 2000);
+  // setTimeout(() => todoElement.classList.remove('slide'), 2000);
 }
 
 function completeTodo(): void {
@@ -132,7 +137,14 @@ function completeTodo(): void {
   updateDom();
 }
 
-function updateDom(): void {
+function deleteTodo(): void {
+  const todoIndex = todos.findIndex((todo) => todo.id == this.id);
+  todos.splice(todoIndex, 1);
+  localStorage.setItem('todos', JSON.stringify(todos));
+  updateDom();
+}
+
+function updateDom(animate?: boolean): void {
   const pendingTodos = todos.filter((todo) => !todo.completed);
   const pendingTodoPaneEmptyElemToggle: toggle = pendingTodos.length
     ? 'hide'

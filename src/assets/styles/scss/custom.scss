@@ -6,23 +6,6 @@ body {
         min-height: 85vh;
     }
 }
-#pills-all-todos,
-#pills-pending-todos {
-    .todo-container {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: start;
-        align-items: center;
-
-        &:last-child {
-            margin-bottom: 5rem;
-        }
-        .todo-status-icon {
-            cursor: pointer;
-            font-size: 2rem;
-        }
-    }
-}
 
 aside {
     .profile-img {
@@ -71,21 +54,41 @@ section {
             font-size: 10rem;
         }
     }
-    .todo-container {
-        position: relative;
-        &.slide {
-            animation-name: slide-in;
-            animation-duration: 1000ms;
-            animation-timing-function: ease-in;
-        }
-        input.todo-heading:focus {
-            border: none !important;
-            border-bottom: 1px black;
-        }
-        .bi-check-circle-fill {
-            color: $blue-300 !important;
-            // override text-secondary on checkmark icon
-            //this class is added by javascript
+    #pills-all-todos,
+    #pills-pending-todos {
+        .todo-container {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: start;
+            align-items: center;
+            position: relative;
+
+            &:last-child {
+                margin-bottom: 5rem;
+            }
+            &.slide {
+                animation-name: slide-in;
+                animation-duration: 1000ms;
+                animation-timing-function: ease-in;
+            }
+            input.todo-heading:focus {
+                border: none !important;
+                border-bottom: 1px $primary solid;
+            }
+            .bi {
+                cursor: pointer;
+            }
+            .todo-status-icon {
+                font-size: 2rem;
+            }
+            .todo-delete-icon:hover {
+                color: $danger !important;
+            }
+            .bi-check-circle-fill {
+                color: $blue-300 !important;
+                // override text-secondary on checkmark icon
+                //this class is added by javascript
+            }
         }
     }
 }
