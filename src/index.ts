@@ -69,7 +69,7 @@ function createTodo(todoText: string, todos: Todos): void {
   });
 
   localStorage.setItem('todos', JSON.stringify(todos));
-  updateDom();
+  updateDom(true);
 }
 
 function editTodo(): void {
@@ -128,7 +128,7 @@ function toggleElementDisplay(toggle: toggle, element: Element) {
 
 function animateTodoElement(todoElement: HTMLElement) {
   todoElement.classList.add('slide');
-  // setTimeout(() => todoElement.classList.remove('slide'), 2000);
+  setTimeout(() => todoElement.classList.remove('slide'), 2000);
 }
 
 function completeTodo(): void {
@@ -156,12 +156,16 @@ function updateDom(animate?: boolean): void {
   pendingTodosPane.children[1].textContent = '';
   allTodosPane.children[1].textContent = '';
 
-  todos.forEach((todo) => {
-    appendTodoToDom(todo, allTodosPane.children[1]);
+  todos.forEach((todo, index) => {
+    if (index < todos.length - 1)
+      appendTodoToDom(todo, allTodosPane.children[1]);
+    else appendTodoToDom(todo, allTodosPane.children[1], animate);
   });
-  pendingTodos.forEach((todo) =>
-    appendTodoToDom(todo, pendingTodosPane.children[1]),
-  );
+  pendingTodos.forEach((todo, index) => {
+    if (index < pendingTodos.length - 1)
+      appendTodoToDom(todo, pendingTodosPane.children[1]);
+    else appendTodoToDom(todo, pendingTodosPane.children[1], animate);
+  });
 
   updateStatistics();
 }
