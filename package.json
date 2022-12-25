@@ -1,15 +1,15 @@
 {
   "scripts": {
-    "build": "webpack --mode=production --node-env=production",
+    "build": "webpack --mode=production --config=webpack.prod.js",
     "test": "jest",
     "format": "prettier --write \"src/**/*.{ts,js}\"",
     "lint-es": "prettier --check \"src/**/*.{ts,js}\"",
     "lint": "eslint . --ext .js --ext .ts",
     "lint-es-fix": "eslint . --ext .js --ext .ts --fix",
-    "build:dev": "webpack --mode=development",
+    "build:dev": "webpack --mode=development --config=webpack.prod.js",
     "build:prod": "webpack --mode=production --node-env=production --config=webpack.prod.js",
     "watch": "webpack --watch",
-    "serve": "webpack serve --mode=development --open"
+    "serve": "webpack serve --mode=development --config=webpack.dev.js --open"
   },
   "dependencies": {
     "bootstrap": "^5.2.2",

@@ -1,11 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
-const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -64,11 +59,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: [
-                '@babel/preset-env',
-                { targets: { node: 'current' } },
-                '@babel/preset-typescript',
-              ],
+              presets: ['@babel/preset-env'],
             },
           },
         ],
@@ -89,15 +80,6 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, 'public'),
-    },
-    hot: true,
-    port: 'auto',
-    open: true,
-    watchFiles: ['src/**/*'],
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
@@ -110,15 +92,5 @@ module.exports = {
       excludeChunks: ['main'],
     }),
     new MiniCssExtractPlugin(),
-    new ESLintPlugin({
-      extensions: ['js', 'ts'],
-    }),
-    new ForkTsCheckerWebpackPlugin({}),
-    new ForkTsCheckerNotifierWebpackPlugin({
-      title: 'Type Check',
-    }),
   ],
-  optimization: {
-    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
-  },
 };
