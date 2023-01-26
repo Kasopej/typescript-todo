@@ -4,7 +4,9 @@ body {
     background-color: mix(black, $blue, 10);
     & > main {
         min-height: 85vh;
+        width: fit-content;
     }
+    font-size: 1rem;
 }
 
 aside {
@@ -56,12 +58,17 @@ section {
     }
     #pills-all-todos,
     #pills-pending-todos {
+        > div.d-flex {
+            flex-wrap: wrap;
+        }
         .todo-container {
             display: flex;
             flex-flow: row nowrap;
+            flex-basis: 100%;
             justify-content: start;
             align-items: center;
             position: relative;
+            margin-bottom: 1rem;
 
             &:last-child {
                 margin-bottom: 5rem;
@@ -71,16 +78,27 @@ section {
                 animation-duration: 1000ms;
                 animation-timing-function: ease-in;
             }
-            input.todo-heading:focus {
-                border: none !important;
-                border-bottom: 1px $primary solid;
+            .todo-main {
+                textarea.todo-heading {
+                    resize: none;
+                    &:focus {
+                        border: none !important;
+                        border-bottom: 1px $primary solid;
+                    }
+                }
             }
             .bi {
                 cursor: pointer;
             }
+            // .todo-status{
+            //     max-width: 15%;
+            // }
             .todo-status-icon {
                 font-size: 2rem;
             }
+            // .todo-timestamp{
+            //     max-width: 5%;
+            // }
             .todo-delete-icon:hover {
                 color: $danger !important;
             }
