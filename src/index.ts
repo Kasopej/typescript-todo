@@ -156,13 +156,11 @@ function updateDom(animate?: boolean): void {
 
   todos.forEach((todo, index) => {
     if (index < todos.length - 1) {
-      console.log(index);
       appendTodoToDom(todo, allTodosPane.children[1]);
     } else appendTodoToDom(todo, allTodosPane.children[1], animate);
   });
   pendingTodos.forEach((todo, index) => {
     if (index < pendingTodos.length - 1) {
-      console.log(index);
       appendTodoToDom(todo, pendingTodosPane.children[1]);
     } else appendTodoToDom(todo, pendingTodosPane.children[1], animate);
   });
