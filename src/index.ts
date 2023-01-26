@@ -41,10 +41,6 @@ const todos: Todos = todosInStore ?? [];
 
 if (todos.length) {
   toggleElementDisplay('hide', emptyTodoElements[0]);
-
-  todos.forEach((todo) => {
-    appendTodoToDom(todo, allTodosPane.children[1]);
-  });
   updateDom();
 }
 
@@ -88,8 +84,8 @@ function appendTodoToDom(todo: Todo, rootNode: Element, animate?: boolean) {
   ) as HTMLElement;
 
   const [todoInputElem] = Array.from(
-    todoTemplateClone.getElementsByTagName('input'),
-  ) as Array<HTMLInputElement>;
+    todoTemplateClone.getElementsByTagName('textarea'),
+  ) as Array<HTMLTextAreaElement>;
 
   //attach data & listeners to todo elements
   todoInputElem.id = String(todo.id);
@@ -159,14 +155,16 @@ function updateDom(animate?: boolean): void {
   allTodosPane.children[1].textContent = '';
 
   todos.forEach((todo, index) => {
-    if (index < todos.length - 1)
+    if (index < todos.length - 1) {
+      console.log(index);
       appendTodoToDom(todo, allTodosPane.children[1]);
-    else appendTodoToDom(todo, allTodosPane.children[1], animate);
+    } else appendTodoToDom(todo, allTodosPane.children[1], animate);
   });
   pendingTodos.forEach((todo, index) => {
-    if (index < pendingTodos.length - 1)
+    if (index < pendingTodos.length - 1) {
+      console.log(index);
       appendTodoToDom(todo, pendingTodosPane.children[1]);
-    else appendTodoToDom(todo, pendingTodosPane.children[1], animate);
+    } else appendTodoToDom(todo, pendingTodosPane.children[1], animate);
   });
 
   updateStatistics();
