@@ -9,15 +9,16 @@ const passwordInputElem = document.getElementById(
   'password',
 ) as HTMLInputElement;
 const emailHelpElem: HTMLElement | null = document.getElementById('email-help');
-const passwordHelpElem: HTMLElement | null =
-  document.getElementById('password-help');
+const loginSubmitBtn: HTMLElement | null = document.querySelector(
+  'button[type=submit]',
+);
 
 formElement.addEventListener('submit', login);
 function login(event?: Event): void {
   event?.preventDefault();
 
   if (
-    !/^[a-zA-Z0-9_]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/.test(emailInputElem.value)
+    !/^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/.test(emailInputElem.value)
   ) {
     emailHelpElem?.classList.remove('d-none');
     return;
@@ -28,11 +29,11 @@ function login(event?: Event): void {
       passwordInputElem.value,
     )
   ) {
-    passwordHelpElem?.classList.remove('d-none');
-    return;
+    //do nothing
   }
-  passwordHelpElem?.classList.add('d-none');
-
+  //do nothing.. API will auth password
+  const defaultLoginText = loginSubmitBtn?.innerText;
+  loginSubmitBtn && (loginSubmitBtn.innerText = 'logging in...');
   fetch('https://reqres.in/api/login', {
     method: 'POST',
     headers: {
@@ -49,5 +50,8 @@ function login(event?: Event): void {
       localStorage.setItem('access_token', token);
       localStorage.setItem('email', emailInputElem.value);
       location.href = '/';
+    })
+    .catch(() => {
+      loginSubmitBtn && (loginSubmitBtn.innerText = defaultLoginText as string);
     });
 }
