@@ -15,6 +15,10 @@ aside {
     }
     .figure-caption {
         margin-top: 1rem;
+        #profile-email {
+            word-break: break-all;
+            word-wrap: break-word;
+        }
     }
     .stats {
         & > li {
